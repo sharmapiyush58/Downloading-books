@@ -1,0 +1,17 @@
+The pseudocode is here-
+Use Selenium library(a very good one for directly accesssing the website through any browser). 
+
+
+from selenium import webdriver
+
+browser = webdriver.Chrome()
+browser.get("http://bookzz.org/s/?q=harvard+business+review&t=0")
+
+#this is the div class that is used by bookzz.org for the download links
+elems = browser.find_elements_by_css_selector('.ddownload.color2.dnthandler')
+    for i in range(no. of files):
+    #multiplying by 3 because there are three links for he same file.
+    a = 3*i
+    elems[a].click()
+    if i%7 == 0 && i!=0:
+        change IP address of the system and (wait for the files to download or launch in another browser)
