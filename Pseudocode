@@ -1,17 +1,32 @@
 The pseudocode is here-
 Use Selenium library(a very good one for directly accesssing the website through any browser). 
 
+The python code launches a browsers instance and downloads 7 files, waits for all the downloads to complete, changes IP_address,
+again launches the browser, repetition until all files are downloaded.
 
-from selenium import webdriver
+# 100 files so 101
+ip-change = 70
+for i in range(101):
 
-browser = webdriver.Chrome()
-browser.get("http://bookzz.org/s/?q=harvard+business+review&t=0")
+    if (i%7 == 0):
+        browser = webdriver.Chrome()
+        browser.get("http://bookzz.org/s/?q=harvard+business+review&t=0")
 
-#this is the div class that is used by bookzz.org for the download links
-elems = browser.find_elements_by_css_selector('.ddownload.color2.dnthandler')
-    for i in range(no. of files):
-    #multiplying by 3 because there are three links for he same file.
+        #this is the div class that is used by bookzz.org for the download links
+        elems = browser.find_elements_by_css_selector('.ddownload.color2.dnthandler')
+    
+    #multiplying by 3 because there are three links for the same file.
     a = 3*i
-    elems[a].click()
-    if i%7 == 0 && i!=0:
-        change IP address of the system and (wait for the files to download or launch in another browser)
+	
+	try:
+        elems[a].click()
+	except:
+		print('exception caused by index:', i)
+	    pass
+	
+	if (i%7 == 6):
+	    browser.implicitly_wait(130) # seconds # safe time to ensure all files have been fully downloaded
+	    browser.quit()
+	    ip-change = ip-change + 10
+	    ipaddress.ip_address('192.168.0.{0}', ip-change)
+	    
