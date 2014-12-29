@@ -1,0 +1,28 @@
+from selenium import webdriver
+import ipaddress
+
+ip-change = 70
+# 100 files so 101
+for i in range(101):
+
+    if (i%7 == 0):
+        browser = webdriver.Chrome()
+        browser.get("http://bookzz.org/s/?q=harvard+business+review&t=0")
+
+        #this is the div class that is used by bookzz.org for the download links
+        elems = browser.find_elements_by_css_selector('.ddownload.color2.dnthandler')
+    
+    #multiplying by 3 because there are three links for the same file.
+    a = 3*i
+	
+	try:
+        elems[a].click()
+	except:
+		print('exception caused by index:', i)
+	    pass
+	
+	if (i%7 == 6):
+	    browser.implicitly_wait(130) # seconds # safe time to ensure all files have been fully downloaded
+	    browser.quit()
+	    ip-change = ip-change + 10
+	    ipaddress.ip_address('192.168.0.{0}', ip-change)
