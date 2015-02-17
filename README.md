@@ -1,4 +1,4 @@
-Downloading-books
+Webscraping
 =================
 
-Python script for downloading books.
+Python script for downloading books via web-scraping.
